@@ -15,15 +15,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenuBar,
-    QScrollArea, QSizePolicy, QStatusBar, QTabWidget,
-    QTextEdit, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QMainWindow,
+    QMenuBar, QPushButton, QScrollArea, QSizePolicy,
+    QStackedWidget, QStatusBar, QTabWidget, QTextEdit,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(670, 654)
+        MainWindow.resize(885, 654)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
@@ -49,19 +50,46 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
         self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 498, 254))
-        self.label = QLabel(self.scrollAreaWidgetContents)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(0, 0, 100, 40))
         self.textEdit_cpu = QTextEdit(self.scrollAreaWidgetContents)
         self.textEdit_cpu.setObjectName(u"textEdit_cpu")
         self.textEdit_cpu.setGeometry(QRect(100, 0, 400, 40))
-        self.label_3 = QLabel(self.scrollAreaWidgetContents)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(0, 40, 100, 40))
-        self.label_4 = QLabel(self.scrollAreaWidgetContents)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setGeometry(QRect(0, 80, 100, 40))
+        self.textEdit_ram = QTextEdit(self.scrollAreaWidgetContents)
+        self.textEdit_ram.setObjectName(u"textEdit_ram")
+        self.textEdit_ram.setGeometry(QRect(100, 40, 400, 40))
+        self.textEdit_hd = QTextEdit(self.scrollAreaWidgetContents)
+        self.textEdit_hd.setObjectName(u"textEdit_hd")
+        self.textEdit_hd.setGeometry(QRect(100, 80, 400, 40))
+        self.pushButton_cpu = QPushButton(self.scrollAreaWidgetContents)
+        self.pushButton_cpu.setObjectName(u"pushButton_cpu")
+        self.pushButton_cpu.setGeometry(QRect(0, 0, 100, 40))
+        self.pushButton_ram = QPushButton(self.scrollAreaWidgetContents)
+        self.pushButton_ram.setObjectName(u"pushButton_ram")
+        self.pushButton_ram.setGeometry(QRect(0, 40, 100, 40))
+        self.pushButton_hd = QPushButton(self.scrollAreaWidgetContents)
+        self.pushButton_hd.setObjectName(u"pushButton_hd")
+        self.pushButton_hd.setGeometry(QRect(0, 80, 100, 40))
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.groupBox = QGroupBox(self.tab_1)
+        self.groupBox.setObjectName(u"groupBox")
+        self.groupBox.setGeometry(QRect(510, 10, 120, 80))
+        self.groupBox.setAutoFillBackground(False)
+        self.frame = QFrame(self.tab_1)
+        self.frame.setObjectName(u"frame")
+        self.frame.setGeometry(QRect(670, 30, 120, 80))
+        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
+        self.stackedWidget = QStackedWidget(self.tab_1)
+        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget.setGeometry(QRect(500, 200, 300, 250))
+        self.page_cpu = QWidget()
+        self.page_cpu.setObjectName(u"page_cpu")
+        self.stackedWidget.addWidget(self.page_cpu)
+        self.page_ram = QWidget()
+        self.page_ram.setObjectName(u"page_ram")
+        self.stackedWidget.addWidget(self.page_ram)
+        self.page_hd = QWidget()
+        self.page_hd.setObjectName(u"page_hd")
+        self.stackedWidget.addWidget(self.page_hd)
         self.tabWidget.addTab(self.tab_1, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -81,7 +109,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 670, 22))
+        self.menubar.setGeometry(QRect(0, 0, 885, 22))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -90,6 +118,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -97,9 +126,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\u0421\u0438\u0441\u0442\u0435\u043c\u043d\u044b\u0439 \u043c\u043e\u043d\u0438\u0442\u043e\u0440", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0430\u043c\u044f\u0442\u044c", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.pushButton_cpu.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440", None))
+        self.pushButton_ram.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0430\u043c\u044f\u0442\u044c", None))
+        self.pushButton_hd.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0441\u043a", None))
+        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"GroupBox", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), QCoreApplication.translate("MainWindow", u"\u0421\u0432\u0435\u0434\u0435\u043d\u0438\u044f \u043e \u0441\u0438\u0441\u0442\u0435\u043c\u0435", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u0446\u0435\u0441\u0441\u044b", None))
