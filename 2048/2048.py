@@ -26,12 +26,12 @@ class GameForm(QMainWindow):
     def initUi(self):
         """Инициализация интерфейса"""
         self.setWindowTitle("2048")
-        self.setWindowIcon(QIcon('../2048.png'))
+        self.setWindowIcon(QIcon('2048.png'))
         self.initGameOpt()  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         self.grid = 0
         msg = QMessageBox()
         msg.setWindowTitle("Добро пожаловать")
-        msg.setWindowIcon(QIcon('../2048.png'))
+        msg.setWindowIcon(QIcon('2048.png'))
         msg.setText("Выберите размер поля")
         Button3 = msg.addButton("3X3", QMessageBox.ButtonRole.AcceptRole)
         Button4 = msg.addButton("4X4", QMessageBox.ButtonRole.AcceptRole)
@@ -76,8 +76,8 @@ class GameForm(QMainWindow):
         self.curScore = 0
         self.bstScore = 0
         # Загрузить рекорд
-        if os.path.exists("../bestscore.txt"):
-            with open("../bestscore.txt", "r") as f:
+        if os.path.exists("bestscore.txt"):
+            with open("bestscore.txt", "r") as f:
                 self.bstScore = int(f.read())
 
     def paintEvent(self, event):
@@ -114,7 +114,7 @@ class GameForm(QMainWindow):
         :param event: event
         :return: None
         """
-        with open("../bestscore.txt", "w") as f:
+        with open("bestscore.txt", "w") as f:
             f.write(str(self.bstScore))
 
     def drawGameGraph(self, qp):

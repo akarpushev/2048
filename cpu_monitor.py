@@ -1,19 +1,14 @@
-"""
-Пример работы с системным монитором (QTimer)
-"""
-
 import sys
 import psutil
-# matplotlib.use('Qt5Agg')
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QTextEdit
 from PySide6.QtCore import QTimer
 
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 
-class SystemMonitor(QMainWindow):
+class CPUMonitor(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Системный монитор")
@@ -83,6 +78,6 @@ class SystemMonitor(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = SystemMonitor()
+    window = CPUMonitor()
     window.show()
     app.exec()

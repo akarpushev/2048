@@ -18,10 +18,6 @@ class SystemWidget(QtWidgets.QWidget):
         super().__init__(parent)
         self.initUi()
     def initUi(self) -> None:
-        """
-        Инициализация Ui
-        :return: None
-        """
         self.system_value = QtWidgets.QProgressBar()
         self.system_value.setRange(0, 100)
         self.system_value.setOrientation(QtCore.Qt.Orientation.Vertical)
@@ -37,23 +33,13 @@ class SystemWidget(QtWidgets.QWidget):
         self.setLayout(layout)
 
     def setValue(self, value: int) -> None:
-        """
-        Установка значения system_value в CPUWidget
-        :param value: новое значение
-        :return: None
-        """
         self.system_value.setValue(value)
 
     def setText(self, text: str) -> None:
-        """
-        Установка значения system_label в CPUWidget
-        :param text: новый текст в виджете
-        :return: None
-        """
         self.system_label.setText(text)
 
 
-class CPUMonitor(QtWidgets.QWidget):
+class CPU_Core_Monitor(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -61,10 +47,6 @@ class CPUMonitor(QtWidgets.QWidget):
         self.initThreads()
 
     def initUI(self) -> None:
-        """
-        Инициализация Ui
-        :return: None
-        """
         self.setWindowTitle("мониторинг системы")
         self.setWindowIcon(QIcon('icon.png'))
         layout = QtWidgets.QHBoxLayout()
@@ -75,20 +57,11 @@ class CPUMonitor(QtWidgets.QWidget):
         self.setLayout(layout)
 
     def initThreads(self) -> None:
-        """
-        Инициализация потоков
-        :return: None
-        """
         self.systemMonitor = SystemMonitor()
         self.systemMonitor.start()
         self.systemMonitor.system_info.connect(self.updateSystemWidget)
 
     def updateSystemWidget(self, cpu_percent_list: list) -> None:
-        """
-        Обновление параметров системных виджетов
-        :param cpu_percent_list: список со значениями загрузки CPU
-        :return: None
-        """
         layout = self.layout()
 
         for cpu_count in range(layout.count()):
@@ -101,7 +74,7 @@ class CPUMonitor(QtWidgets.QWidget):
 if __name__ == '__main__':
     app = QtWidgets.QApplication()
 
-    win = CPUMonitor()
+    win = CPU_Core_Monitor()
     win.show()
 
     app.exec()

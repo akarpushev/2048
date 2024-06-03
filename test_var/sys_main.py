@@ -2,7 +2,7 @@ from PySide6 import QtWidgets, QtGui, QtCore
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QApplication, QMainWindow
 from system_monitoring import Ui_MainWindow
-from cpu_monutor import CPUMonitor
+from cpu_core_monutor import CPU_Core_Monitor
 import os
 import platform
 import psutil
@@ -81,7 +81,7 @@ class Window(QMainWindow, QtCore.QSettings, Ui_MainWindow):
         # layout = CPUMonitor()
         # self.ui.tab_2.setLayout(layout)
         layout = QtWidgets.QHBoxLayout()
-        layout.addWidget(CPUMonitor(self))
+        layout.addWidget(CPU_Core_Monitor(self))
         self.ui.tab_2.setLayout(layout)
 
 
