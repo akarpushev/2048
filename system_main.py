@@ -1,5 +1,5 @@
-from PySide6 import QtWidgets
-from PySide6.QtWidgets import QMainWindow, QStackedWidget
+from PySide6 import QtWidgets, QtGui
+from PySide6.QtWidgets import QMainWindow, QStackedWidget, QComboBox, QVBoxLayout
 
 from system_monitoring import Ui_MainWindow
 from cpu_monitor import CPUMonitor
@@ -41,6 +41,36 @@ class Window(QMainWindow, Ui_MainWindow):
         layout_4.addWidget(ServiceMonitor())
         self.ui.tab_4.setLayout(layout_4)
 
+        self.cpu_monitor_ = CPUMonitor()
+        self.ram_monitor_ = RAMMonitor()
+        self.hd_monitor_ = HdMonitor()
+        self.stacked_widget = QStackedWidget(self)
+        self.stacked_widget.addWidget(self.cpu_monitor_)
+        self.stacked_widget.addWidget(self.ram_monitor_)
+        self.stacked_widget.addWidget(self.hd_monitor_)
+        self.combobox = QComboBox(self)
+        self.combobox.addItems(['cpu_monitor_', 'ram_monitor_', 'hd_monitor_'])
+        self.layout = QVBoxLayout(self)
+        self.layout.addWidget(self.combobox)
+        self.layout.addWidget(self.stacked_widget)
+        self.setLayout(self.layout)
+
+        self.combobox.activated.connect(self.stacked_widget.setCurrentIndex)
+
+        self.ui.pushButton_cpu.clicked.connect(self.cpu_monitor)
+        self.ui.pushButton_ram.clicked.connect(self.ram_monitor)
+        self.ui.pushButton_hd.clicked.connect(self.hd_monitor)
+
+    def cpu_monitor(self):
+        self.stacked_widget.setCurrentIndex(0)
+
+        # self.cpu_monitor_ = CPUMonitor()
+        # self.stacked_widget = QStackedWidget(self)
+        # self.stacked_widget.addWidget(self.cpu_monitor_)
+        # self.stacked_widget.setGeometry(500, 50, 700, 500)
+        self.stacked_widget.show()
+
+
 
         #                         f"количество ядер: {os.cpu_count()} \n\n"
         #                         f"объём RAM: {psutil.virtual_memory().total}\n\n"
@@ -70,9 +100,7 @@ class Window(QMainWindow, Ui_MainWindow):
         # self.layout.addWidget(SystemMonitor)
         # self.ui.frame_cpu.
 
-        self.ui.pushButton_cpu.clicked.connect(self.cpu_monitor)
-        self.ui.pushButton_ram.clicked.connect(self.ram_monitor)
-        self.ui.pushButton_hd.clicked.connect(self.hd_monitor)
+
 
         # self.ui.stackedWidget.setCurrentIndex(0)
         # self.ui.stackedWidget.addWidget(SystemMonitor())
@@ -80,12 +108,22 @@ class Window(QMainWindow, Ui_MainWindow):
         # self.ui.stackedWidget.addWidget(RAMMonitor())
 
 
-    def cpu_monitor(self):
-        self.cpu_monitor_ = CPUMonitor()
-        self.stacked_widget = QStackedWidget(self)
-        self.stacked_widget.addWidget(self.cpu_monitor_)
-        self.stacked_widget.setGeometry(500, 50, 700, 500)
-        self.stacked_widget.show()
+
+
+        # layout_2 = QStackedWidget()
+        # layout_2.addWidget(CPUMonitor())
+        # layout_2.setGeometry(500, 50, 700, 500)
+        # layout_2.show()
+
+
+        #self.ui.tab_1.setLayout(layout_2)
+
+
+
+
+
+
+
 
 
         #self.stacked_Widget.setCurrentIndex(0)
@@ -108,8 +146,9 @@ class Window(QMainWindow, Ui_MainWindow):
         self.hd_monitor_ = HdMonitor()
         self.stacked_widget = QStackedWidget(self)
         self.stacked_widget.addWidget(self.hd_monitor_)
-        self.stacked_widget.setGeometry(500, 50, 700, 500)
+        self.stacked_widget.setGeometry(400, 0, 700, 300)
         self.stacked_widget.show()
+
 
 
 if __name__ == "__main__":

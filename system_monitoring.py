@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QMenuBar,
-    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
-    QTextEdit, QWidget)
+    QPushButton, QSizePolicy, QStackedWidget, QStatusBar,
+    QTabWidget, QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -31,13 +31,13 @@ class Ui_MainWindow(object):
         self.tabWidget.setGeometry(QRect(0, 0, 1200, 550))
         self.tab_1 = QWidget()
         self.tab_1.setObjectName(u"tab_1")
-        self.widget = QWidget(self.tab_1)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(0, 10, 471, 491))
-        self.gridLayout = QGridLayout(self.widget)
+        self.layoutWidget = QWidget(self.tab_1)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(0, 10, 471, 491))
+        self.gridLayout = QGridLayout(self.layoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.pushButton_cpu = QPushButton(self.widget)
+        self.pushButton_cpu = QPushButton(self.layoutWidget)
         self.pushButton_cpu.setObjectName(u"pushButton_cpu")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.pushButton_cpu, 0, 0, 1, 1)
 
-        self.textEdit_cpu = QTextEdit(self.widget)
+        self.textEdit_cpu = QTextEdit(self.layoutWidget)
         self.textEdit_cpu.setObjectName(u"textEdit_cpu")
         sizePolicy.setHeightForWidth(self.textEdit_cpu.sizePolicy().hasHeightForWidth())
         self.textEdit_cpu.setSizePolicy(sizePolicy)
@@ -58,7 +58,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.textEdit_cpu, 0, 1, 1, 1)
 
-        self.pushButton_ram = QPushButton(self.widget)
+        self.pushButton_ram = QPushButton(self.layoutWidget)
         self.pushButton_ram.setObjectName(u"pushButton_ram")
         sizePolicy.setHeightForWidth(self.pushButton_ram.sizePolicy().hasHeightForWidth())
         self.pushButton_ram.setSizePolicy(sizePolicy)
@@ -67,7 +67,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.pushButton_ram, 1, 0, 1, 1)
 
-        self.textEdit_ram = QTextEdit(self.widget)
+        self.textEdit_ram = QTextEdit(self.layoutWidget)
         self.textEdit_ram.setObjectName(u"textEdit_ram")
         sizePolicy.setHeightForWidth(self.textEdit_ram.sizePolicy().hasHeightForWidth())
         self.textEdit_ram.setSizePolicy(sizePolicy)
@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.textEdit_ram, 1, 1, 1, 1)
 
-        self.pushButton_hd = QPushButton(self.widget)
+        self.pushButton_hd = QPushButton(self.layoutWidget)
         self.pushButton_hd.setObjectName(u"pushButton_hd")
         self.pushButton_hd.setEnabled(True)
         self.pushButton_hd.setMinimumSize(QSize(100, 40))
@@ -84,7 +84,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.pushButton_hd, 2, 0, 1, 1)
 
-        self.textEdit_hd = QTextEdit(self.widget)
+        self.textEdit_hd = QTextEdit(self.layoutWidget)
         self.textEdit_hd.setObjectName(u"textEdit_hd")
         sizePolicy.setHeightForWidth(self.textEdit_hd.sizePolicy().hasHeightForWidth())
         self.textEdit_hd.setSizePolicy(sizePolicy)
@@ -93,6 +93,18 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.textEdit_hd, 2, 1, 1, 1)
 
+        self.stackedWidget = QStackedWidget(self.tab_1)
+        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget.setGeometry(QRect(530, 180, 211, 241))
+        self.stackedWidget.setStyleSheet(u"")
+        self.page = QWidget()
+        self.page.setObjectName(u"page")
+        self.page.setStyleSheet(u"background-color: rgb(0, 170, 255);")
+        self.stackedWidget.addWidget(self.page)
+        self.page_2 = QWidget()
+        self.page_2.setObjectName(u"page_2")
+        self.page_2.setStyleSheet(u"background-color: rgb(255, 255, 0);")
+        self.stackedWidget.addWidget(self.page_2)
         self.tabWidget.addTab(self.tab_1, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -118,6 +130,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
